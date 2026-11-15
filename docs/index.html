@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Прототип книжного рекомендательного сервиса</title>
+  <style>
+    body {
+      font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      max-width: 760px;
+      margin: 40px auto;
+      padding: 0 16px;
+      line-height: 1.55;
+      color: #222;
+      background: #fff;
+    }
+    h1 { font-size: 1.7em; margin-bottom: 0.2em; }
+    .subtitle { color: #666; margin-top: 0; }
+    ol { padding-left: 1.3em; }
+    li { margin-bottom: 14px; }
+    li a { font-weight: 600; font-size: 1.05em; }
+    a { color: #1a5fb4; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    table { border-collapse: collapse; margin: 12px 0 20px; font-size: 0.95em; }
+    th, td { border: 1px solid #ddd; padding: 6px 12px; text-align: right; }
+    th:first-child, td:first-child { text-align: left; }
+    th { background: #f5f5f5; }
+    footer { margin-top: 36px; padding-top: 12px; border-top: 1px solid #eee; color: #666; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <h1>Прототип книжного рекомендательного сервиса</h1>
+  <p class="subtitle">Домашнее задание по курсу "Рекомендательные системы", датасет goodbooks-10k</p>
+
+  <p>
+    На одних и тех же данных построены и сравнены четыре подхода: популярные книги, контентная модель на TF-IDF,
+    Item-based CF и SVD. Работа разбита на шесть ноутбуков по этапам задания.
+  </p>
+
+  <ol>
+    <li>
+      <a href="01_eda.html">Знакомство с данными и EDA</a><br>
+      Распределение оценок, активность пользователей, популярность книг, теги. Проблемы данных: разреженность,
+      холодный старт, смещение популярности.
+    </li>
+    <li>
+      <a href="02_baselines_content.html">Базовые и контентные модели</a><br>
+      Разбиение на train/test, топ книг по среднему рейтингу, TF-IDF по названию и тегам, поиск похожих книг.
+    </li>
+    <li>
+      <a href="03_item_based_cf.html">Item-based CF</a><br>
+      Разреженная матрица пользователь-книга, косинусная близость книг, предсказание оценки по K соседям,
+      вычислительная сложность.
+    </li>
+    <li>
+      <a href="04_svd.html">SVD</a><br>
+      Матричное разложение из библиотеки surprise, подбор параметров, RMSE на тесте, рекомендации для пользователя.
+    </li>
+    <li>
+      <a href="05_evaluation.html">Оценка и сравнение моделей</a><br>
+      Precision@K, Recall@K и nDCG@K на отложенной выборке, сводная таблица.
+    </li>
+    <li>
+      <a href="06_hybrid_conclusions.html">Гибридизация и выводы</a><br>
+      Гибрид для холодного старта, проверка на новых книгах, итоги и идеи для улучшения.
+    </li>
+  </ol>
+
+  <h2 style="font-size:1.2em">Результаты на тестовой выборке</h2>
+  <table>
+    <tr><th>Модель</th><th>Precision@10</th><th>Recall@10</th><th>nDCG@10</th><th>RMSE</th></tr>
+    <tr><td>Popularity</td><td>0.0005</td><td>0.0018</td><td>0.0012</td><td>-</td></tr>
+    <tr><td>Content-based (TF-IDF)</td><td>0.0473</td><td>0.1688</td><td>0.1315</td><td>-</td></tr>
+    <tr><td>Item-based CF</td><td><b>0.0820</b></td><td><b>0.2728</b></td><td><b>0.2272</b></td><td>0.852</td></tr>
+    <tr><td>SVD</td><td>0.0005</td><td>0.0015</td><td>0.0010</td><td><b>0.829</b></td></tr>
+  </table>
+  <p>
+    Для рекомендаций лучше всех работает Item-based CF. SVD точнее всех предсказывает оценку, но при ранжировании
+    по всему каталогу не лучше случайной выдачи. Подробный разбор есть в ноутбуках 5 и 6.
+  </p>
+
+  <footer>
+    Код и ноутбуки: <a href="https://github.com/KarimovDev/mephi-hw-recsys-2026">github.com/KarimovDev/mephi-hw-recsys-2026</a>
+  </footer>
+</body>
+</html>
